@@ -2,16 +2,21 @@ const { get } = require("express/lib/request");
 let fs = require("fs");
 let path = require("path");
 let process = require("process");
+let instance = null;
 
 module.exports = function (optPath) {
+  if (instance !== null) {
+    return instance;
+  }
+
   let cname = ".jssteconfig";
   let cpath = path.join(__dirname, "..", "..");
-  let conf = getCurrentConfig(cpath)
+  let conf = getCurrentConfig(cpath);
   if (conf.jsste.paths.files) {
     conf.jsste.paths.files = path.join(cpath, conf.jsste.paths.files);
   }
   conf.workingdir = process.cwd();
-
+  instance = conf;
   return conf;
 };
 

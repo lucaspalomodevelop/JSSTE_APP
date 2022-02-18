@@ -1,8 +1,8 @@
 let conf = require("./helper/conf")();
-// let jsste = require("./jsste")(conf.jsste);
+// let jsste = require("./jsste")(conf);
 let websrv = require("./websrv")(conf);
 
-console.log("jssteconfig", conf);
+// console.log("jssteconfig", conf);
 
 websrv.slisten(() => {
   console.log(

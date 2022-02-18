@@ -1,3 +1,3 @@
 # JSSTE_APP
 
-The full Application from the [JSSTE](https://github.com/lucaspalomodevelop/JSSTE) project.
+The full application from the [JSSTE](https://github.com/lucaspalomodevelop/JSSTE) project.

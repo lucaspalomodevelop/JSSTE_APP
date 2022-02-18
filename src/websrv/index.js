@@ -6,16 +6,19 @@ module.exports = function (conf) {
   const cookieParser = require("cookie-parser");
   const fs = require("fs");
 
+  const internalRouter = require("./routes/internalRouter");
+
   app.use(bodyParser.json());
   app.use(cookieParser());
 
-  app.get("/", (req, res) => {
-    let files = [];
-    fs.readdirSync(conf.jsste.paths.files).forEach((file) => {
-      files.push(file);
-    });
-    res.json(files);
-  });
+  app.use("/internal", internalRouter);
+  // app.get("/config", (req, res) => {
+  //   // let files = [];
+  //   // fs.readdirSync(conf.jsste.paths.files).forEach((file) => {
+  //   //   files.push(file);
+  //   // });
+  //   res.json(conf);
+  // });
 
   app.slisten = function (cb) {
     app.listen(websrvConfig.port, websrvConfig.host, cb);
