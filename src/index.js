@@ -4,11 +4,6 @@ let websrv = require("./websrv")(conf);
 
 // console.log("jssteconfig", conf);
 
-websrv.slisten(() => {
-  console.log(
-    "Server started on http://" +
-      conf.webserver.host +
-      ":" +
-      conf.webserver.port
-  );
+websrv.slisten((host, port) => {
+  console.log("Server started on http://" + host + ":" + port);
 });

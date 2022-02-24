@@ -21,7 +21,8 @@ module.exports = function (conf) {
   // });
 
   app.slisten = function (cb) {
-    app.listen(websrvConfig.port, websrvConfig.host, cb);
+
+    app.listen(websrvConfig.port, websrvConfig.host, () => {cb(websrvConfig.host, websrvConfig.port);});
   };
 
   return app;
