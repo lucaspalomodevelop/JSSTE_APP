@@ -12,13 +12,6 @@ module.exports = function (conf) {
   app.use(cookieParser());
 
   app.use("/internal", internalRouter);
-  // app.get("/config", (req, res) => {
-  //   // let files = [];
-  //   // fs.readdirSync(conf.jsste.paths.files).forEach((file) => {
-  //   //   files.push(file);
-  //   // });
-  //   res.json(conf);
-  // });
 
   app.slisten = function (cb) {
 
