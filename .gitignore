@@ -1,8 +1,11 @@
 
 .jssteconfig
 
-files/*
+files/sites
+files/templates
+files/media
 
+planung
 
 # Logs
 logs
