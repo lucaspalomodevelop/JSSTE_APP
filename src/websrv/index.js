@@ -14,8 +14,17 @@ module.exports = function (conf) {
   app.use("/internal", internalRouter);
 
   app.slisten = function (cb) {
+    app.ServerInstance = app.listen(
+      websrvConfig.port,
+      websrvConfig.host,
+      () => {
+        cb(websrvConfig.host, websrvConfig.port);
+      }
+    );
+  };
 
-    app.listen(websrvConfig.port, websrvConfig.host, () => {cb(websrvConfig.host, websrvConfig.port);});
+  app.close = function () {
+    app.ServerInstance.close();
   };
 
   return app;
