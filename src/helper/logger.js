@@ -19,10 +19,10 @@ console.log = function (d) {
   log_file.write(d);
   log_stdout.write(d);
 };
+console.error = console.log;
 
 function getCurrentlog() {
   return fs.readFileSync(__dirname + "/../../logs/" + name, "utf8").toString();
-  // .replace(/\n/g, "<br>");
 }
 
 module.exports = { getCurrentlog };

@@ -57,7 +57,6 @@ function test() {
         </body>
         </html>`
       );
-      console.log(result);
     });
 
     it("should not rendern _VAR_", function () {

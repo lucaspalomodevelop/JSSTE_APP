@@ -15,7 +15,7 @@ websrv.slisten((host, port) => {
  * Stops the server
  */
 process.on("SIGINT", () => {
-  console.log("\nWeb-Server Beenden ...");
+  console.log("Web-Server Beenden ...");
   websrv.close();
   process.exit();
 });

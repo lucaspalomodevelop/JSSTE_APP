@@ -5,7 +5,6 @@ const States = require("../../helper/states");
 const logger = require("../../helper/logger");
 
 router.get("/conf", (req, res) => {
-  console.log(conf);
   res.json(conf);
 });
 

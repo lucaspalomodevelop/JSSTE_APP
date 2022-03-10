@@ -10,11 +10,17 @@ module.exports = function (conf) {
 
   const internalRouter = require("./routes/internalRouter");
 
+  app.use((req, res, next) => {
+    res.on("finish", () => {
+      console.log(`${req.method} ${req.url} ${res.statusCode}`);
+    });
+    next();
+  });
   app.use(cors());
   app.use(bodyParser.json());
   app.use(cookieParser());
-
   app.use("/api", internalRouter);
+  app.use("/dashboard", express.static(__dirname + "/../../dashboard"));
 
   app.slisten = function (cb) {
     app.ServerInstance = app
