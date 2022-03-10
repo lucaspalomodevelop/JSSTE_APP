@@ -4,6 +4,11 @@ let path = require("path");
 let process = require("process");
 let instance = null;
 
+/**
+ *
+ * @param {*} optPath
+ * @returns
+ */
 module.exports = function (optPath) {
   if (instance !== null) {
     return instance;
@@ -20,6 +25,11 @@ module.exports = function (optPath) {
   return conf;
 };
 
+/**
+ *
+ * @param {*} cpath
+ * @returns
+ */
 function getCurrentConfig(cpath) {
   let result = "{}";
   let confbundle = [

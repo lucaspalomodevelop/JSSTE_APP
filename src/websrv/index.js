@@ -4,14 +4,16 @@ module.exports = function (conf) {
   const app = express();
   const bodyParser = require("body-parser");
   const cookieParser = require("cookie-parser");
+  const cors = require("cors");
   const fs = require("fs");
 
   const internalRouter = require("./routes/internalRouter");
 
+  app.use(cors());
   app.use(bodyParser.json());
   app.use(cookieParser());
 
-  app.use("/internal", internalRouter);
+  app.use("/api", internalRouter);
 
   app.slisten = function (cb) {
     app.ServerInstance = app.listen(
@@ -23,6 +25,12 @@ module.exports = function (conf) {
     );
   };
 
+  /**
+   * @function
+   * @name close
+   * @description
+   * Stops the server
+   */
   app.close = function () {
     app.ServerInstance.close();
   };
