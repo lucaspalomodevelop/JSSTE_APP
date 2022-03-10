@@ -1,3 +1,4 @@
+require("./helper/logger");
 let conf = require("./helper/conf")();
 let websrv = require("./websrv")(conf);
 

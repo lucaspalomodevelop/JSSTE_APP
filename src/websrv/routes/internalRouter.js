@@ -1,9 +1,8 @@
 const conf = require("../../helper/conf")();
 const express = require("express");
 const router = express.Router();
-
-const jssteState = { statusMSG: "could not started JSSTE", status: 1 };
-const websrvState = { port: 5000, status: 1 };
+const States = require("../../helper/states");
+const logger = require("../../helper/logger");
 
 router.get("/conf", (req, res) => {
   console.log(conf);
@@ -11,10 +10,13 @@ router.get("/conf", (req, res) => {
 });
 
 router.get("/jsste/status", (req, res) => {
-  res.json(jssteState);
+  res.json(States.JssteState);
 });
 router.get("/websrv/status", (req, res) => {
-  res.json(websrvState);
+  res.json(States.WebsrvState);
+});
+router.get("/logs", (req, res) => {
+  res.json(logger.getCurrentlog());
 });
 
 module.exports = router;

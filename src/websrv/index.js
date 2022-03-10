@@ -6,6 +6,7 @@ module.exports = function (conf) {
   const cookieParser = require("cookie-parser");
   const cors = require("cors");
   const fs = require("fs");
+  let State = require("../helper/states").WebsrvState;
 
   const internalRouter = require("./routes/internalRouter");
 
@@ -16,13 +17,18 @@ module.exports = function (conf) {
   app.use("/api", internalRouter);
 
   app.slisten = function (cb) {
-    app.ServerInstance = app.listen(
-      websrvConfig.port,
-      websrvConfig.host,
-      () => {
+    app.ServerInstance = app
+      .listen(websrvConfig.port, websrvConfig.host, () => {
+        State.status = 0;
+        State.statusMSG = "webserver is running";
+        State.port = websrvConfig.port;
         cb(websrvConfig.host, websrvConfig.port);
-      }
-    );
+      })
+      .on("error", (err) => {
+        State.status = 1;
+        State.statusMSG = "webserver could not started";
+        console.log(err);
+      });
   };
 
   /**
