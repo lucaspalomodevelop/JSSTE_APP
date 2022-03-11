@@ -11,8 +11,11 @@ module.exports = function (conf) {
   const internalRouter = require("./routes/internalRouter");
 
   app.use((req, res, next) => {
+    var start = process.hrtime();
     res.on("finish", () => {
-      console.log(`${req.method} ${req.url} ${res.statusCode}`);
+      var elapsed = process.hrtime(start)[1] / 1000000;
+      let time = elapsed.toFixed(3).replace(".", ",") + " ms";
+      console.log(`${req.method} ${req.url} ${res.statusCode} | ${time}`);
     });
     next();
   });
@@ -33,7 +36,7 @@ module.exports = function (conf) {
       .on("error", (err) => {
         State.status = 1;
         State.statusMSG = "webserver could not started";
-        console.log(err);
+        console.error(err);
       });
   };
 

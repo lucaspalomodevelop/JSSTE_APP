@@ -14,8 +14,11 @@ router.get("/jsste/status", (req, res) => {
 router.get("/websrv/status", (req, res) => {
   res.json(States.WebsrvState);
 });
+router.get("/shortlogs", (req, res) => {
+  res.json(logger.getCurrentlog(32));
+});
 router.get("/logs", (req, res) => {
-  res.json(logger.getCurrentlog());
+  res.json(logger.getCurrentlog(64));
 });
 
 module.exports = router;

@@ -19,10 +19,26 @@ console.log = function (d) {
   log_file.write(d);
   log_stdout.write(d);
 };
-console.error = console.log;
+console.error = (d) => {
+  console.log("[ERROR] " + util.format(d));
+};
 
-function getCurrentlog() {
-  return fs.readFileSync(__dirname + "/../../logs/" + name, "utf8").toString();
+// function getCurrentlog() {
+//   return fs.readFileSync(__dirname + "/../../logs/" + name, "utf8").toString();
+// }
+
+function getCurrentlog(num = -1) {
+  if (num > 0) {
+    let log = fs
+      .readFileSync(__dirname + "/../../logs/" + name, "utf8")
+      .toString()
+      .split("\n");
+    return log.slice(-num).join("\n");
+  } else {
+    return fs
+      .readFileSync(__dirname + "/../../logs/" + name, "utf8")
+      .toString();
+  }
 }
 
 module.exports = { getCurrentlog };
