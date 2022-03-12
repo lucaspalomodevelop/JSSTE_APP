@@ -1,6 +1,7 @@
-require("./helper/logger");
+let logger = require("./helper/logger");
 let conf = require("./helper/conf")();
 let websrv = require("./websrv")(conf);
+let jobs = require("./helper/cronjobs");
 
 /**
  * @description
@@ -15,6 +16,9 @@ websrv.slisten((host, port) => {
  * Stops the server
  */
 process.on("SIGINT", () => {
+  logger.DeleteOldLogs();
+  console.log("Cronjob Beenden ...");
+  jobs.Stop();
   console.log("Web-Server Beenden ...");
   websrv.close();
   process.exit();
