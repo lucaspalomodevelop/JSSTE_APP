@@ -1,10 +1,11 @@
-const conf = require("../../helper/conf")();
+let conf = require("../../helper/conf")();
 const express = require("express");
 const router = express.Router();
 const States = require("../../helper/states");
 const logger = require("../../helper/logger");
 
 router.get("/conf", (req, res) => {
+  conf = require("../../helper/conf")();
   res.json(conf);
 });
 

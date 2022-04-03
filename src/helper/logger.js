@@ -5,6 +5,15 @@ let name;
 var log_file;
 updateData();
 var log_stdout = process.stdout;
+var currentuuid = uuid();
+
+function uuid() {
+  return "xxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
 
 function updateData() {
   name = "log_" + moment().format("YYYY-MM-DD") + ".log";
@@ -16,7 +25,9 @@ function updateData() {
 console.log = function (d) {
   name = "log_" + moment().format("YYYY-MM-DD") + ".log";
 
-  d = `[ ${moment().format("YYYY-MM-DD HH:mm:ss")}] ${util.format(d)} \n`;
+  d = `[ ${moment().format(
+    "YYYY-MM-DD HH:mm:ss"
+  )}] [${currentuuid}] ${util.format(d)} \n`;
   log_file.write(d);
   log_stdout.write(d);
 };

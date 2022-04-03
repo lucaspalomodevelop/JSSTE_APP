@@ -22,7 +22,6 @@ jobs.Start = function () {
 };
 
 jobs.Stop = function () {
-  console.log("Stopping Cronjobs");
   jobsArray.forEach((job) => {
     job.stop();
   });

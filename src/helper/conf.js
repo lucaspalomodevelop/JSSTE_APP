@@ -1,3 +1,4 @@
+const { time } = require("console");
 const { get } = require("express/lib/request");
 const res = require("express/lib/response");
 let fs = require("fs");
@@ -11,10 +12,13 @@ let instance = null;
  * @returns
  */
 module.exports = function (optPath) {
+  let timestemp = Math.round(new Date().getTime() / 1000);
+
   if (instance !== null) {
-    return instance;
+    if (instance.meta.timestemp + 60 >= timestemp) return instance;
   }
 
+  console.log("creating new config instance");
   let cname = ".jssteconfig";
   let cpath = path.join(__dirname, "..", "..");
   let conf = getCurrentConfig(cpath);
@@ -28,9 +32,8 @@ module.exports = function (optPath) {
 function getMeta(el) {
   return {
     load: el.name,
-    timestemp: new Date().getTime(),
+    timestemp: Math.round(new Date().getTime() / 1000),
     workingdir: process.cwd(),
-    
   };
 }
 
