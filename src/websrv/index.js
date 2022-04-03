@@ -6,6 +6,7 @@ module.exports = function (conf) {
   const cookieParser = require("cookie-parser");
   const cors = require("cors");
   const fs = require("fs");
+  const path = require("path");
   let State = require("../helper/states").WebsrvState;
 
   const internalRouter = require("./routes/internalRouter");
@@ -15,7 +16,9 @@ module.exports = function (conf) {
     res.on("finish", () => {
       var elapsed = process.hrtime(start)[1] / 1000000;
       let time = elapsed.toFixed(3).replace(".", ",") + " ms";
-      console.log(`${req.method} ${req.url} ${res.statusCode} | ${time}`);
+      console.log(
+        `${req.method} ${req.baseUrl + req.path} ${res.statusCode} | ${time}`
+      );
     });
     next();
   });
@@ -24,6 +27,10 @@ module.exports = function (conf) {
   app.use(cookieParser());
   app.use("/api", internalRouter);
   app.use("/dashboard", express.static(__dirname + "/../../dashboard"));
+  app.get("/dashboard/*", (req, res) => {
+    let indexPath = path.join(__dirname + "/../../dashboard/index.html");
+    res.sendFile(indexPath);
+  });
 
   app.slisten = function (cb) {
     app.ServerInstance = app
