@@ -49,7 +49,7 @@ if (cluster.isMaster) {
     // open("http://" + host + ":" + port + "/dashboard");
   });
   process.on("SIGINT", async () => {
-    console.log("Stopping JSSTE APP Worker ...");
+    console.log(`Stopping Worker ${process.pid}...`);
     websrv.close();
     process.exit();
   });
