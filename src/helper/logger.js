@@ -28,11 +28,7 @@ console.error = (d) => {
 
 function DeleteOldLogs(olderThan = 30) {
   let files = fs.readdirSync(__dirname + "/../../logs/");
-  for (file in files) {
-    if (!fs.existsSync(__dirname + "/../../logs/" + file)) {
-      continue;
-    }
-    console.log(file);
+  for (file of files) {
     let date = file.split("_")[1].split(".")[0];
     if (
       moment(date, "YYYY-MM-DD").isBefore(moment().subtract(olderThan, "days"))

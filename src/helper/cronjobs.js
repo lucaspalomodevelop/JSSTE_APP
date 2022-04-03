@@ -10,8 +10,7 @@ jobs.addJob = function (cron, func) {
   return job;
 };
 
-jobs.addJob("* 1 * * * *", function () {
-  console.log("Cronjob");
+jobs.addJob("0 * * * *", function () {
   logger.DeleteOldLogs();
 });
 

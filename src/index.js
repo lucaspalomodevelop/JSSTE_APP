@@ -2,6 +2,7 @@ let logger = require("./helper/logger");
 let conf = require("./helper/conf")();
 let websrv = require("./websrv")(conf);
 let jobs = require("./helper/cronjobs");
+let open = require("open");
 
 /**
  * @description
@@ -9,6 +10,7 @@ let jobs = require("./helper/cronjobs");
  */
 websrv.slisten((host, port) => {
   console.log("Server started on http://" + host + ":" + port);
+  open("http://" + host + ":" + port + "/dashboard");
 });
 
 /**

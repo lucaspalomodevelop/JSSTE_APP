@@ -1,4 +1,5 @@
 const { get } = require("express/lib/request");
+const res = require("express/lib/response");
 let fs = require("fs");
 let path = require("path");
 let process = require("process");
@@ -20,10 +21,18 @@ module.exports = function (optPath) {
   if (conf.jsste.paths.files) {
     conf.jsste.paths.files = path.join(cpath, conf.jsste.paths.files);
   }
-  conf.workingdir = process.cwd();
   instance = conf;
   return conf;
 };
+
+function getMeta(el) {
+  return {
+    load: el.name,
+    timestemp: new Date().getTime(),
+    workingdir: process.cwd(),
+    
+  };
+}
 
 /**
  *
@@ -31,7 +40,7 @@ module.exports = function (optPath) {
  * @returns
  */
 function getCurrentConfig(cpath) {
-  let result = "{}";
+  let result = {};
   let confbundle = [
     {
       name: "cwd",
@@ -62,10 +71,11 @@ function getCurrentConfig(cpath) {
   for (const [index, el] of confbundle.entries()) {
     if (fs.existsSync(el.path)) {
       console.log(`found ${el.name}`);
-      result = fs.readFileSync(el.path);
+      result = JSON.parse(fs.readFileSync(el.path));
+      result.meta = getMeta(el);
       break;
     }
   }
 
-  return JSON.parse(result);
+  return result;
 }
