@@ -5,7 +5,6 @@ let jobs = require("./helper/cronjobs");
 let open = require("open");
 let os = require("os");
 
-
 os.setPriority(os.constants.priority.PRIORITY_HIGHEST);
 
 /**
@@ -22,10 +21,10 @@ websrv.slisten((host, port) => {
  * Stops the server
  */
 process.on("SIGINT", () => {
+  console.log("Web-Server Beenden ...");
+  websrv.close();
   logger.DeleteOldLogs();
   console.log("Cronjob Beenden ...");
   jobs.Stop();
-  console.log("Web-Server Beenden ...");
-  websrv.close();
   process.exit();
 });
