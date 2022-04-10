@@ -31,7 +31,7 @@ module.exports = function (optPath) {
 
 function getMeta(el) {
   return {
-    load: el.name,
+    confloadtype: el.name,
     timestemp: Math.round(new Date().getTime() / 1000),
     workingdir: process.cwd(),
   };
