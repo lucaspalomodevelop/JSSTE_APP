@@ -5,7 +5,7 @@ let jobs = require("./helper/cronjobs");
 let open = require("open");
 let os = require("os");
 
-os.setPriority(os.constants.priority.PRIORITY_HIGHEST);
+//os.setPriority(os.constants.priority.PRIORITY_HIGHEST);
 
 /**
  * @description

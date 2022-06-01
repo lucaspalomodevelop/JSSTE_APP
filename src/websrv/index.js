@@ -26,9 +26,9 @@ module.exports = function (conf) {
   app.use(bodyParser.json());
   app.use(cookieParser());
   app.use("/api", internalRouter);
-  app.use("/dashboard", express.static(__dirname + "/../../dashboard"));
+  app.use("/dashboard", express.static(__dirname + "/../../dashboard/build"));
   app.get("/dashboard/*", (req, res) => {
-    let indexPath = path.join(__dirname + "/../../dashboard/index.html");
+    let indexPath = path.join(__dirname + "/../../dashboard/build/index.html");
     res.sendFile(indexPath);
   });
 

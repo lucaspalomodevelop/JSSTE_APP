@@ -25,9 +25,7 @@ function updateData() {
 console.log = function (d) {
   name = "log_" + moment().format("YYYY-MM-DD") + ".log";
 
-  d = `[ ${moment().format(
-    "YYYY-MM-DD HH:mm:ss"
-  )}] [${currentuuid}] ${util.format(d)} \n`;
+  d = `[ ${moment().format("YYYY-MM-DD HH:mm:ss")}] ${util.format(d)} \n`;
   log_file.write(d);
   log_stdout.write(d);
 };
