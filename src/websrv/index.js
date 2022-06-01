@@ -1,3 +1,5 @@
+const res = require("express/lib/response");
+
 module.exports = function (conf) {
   const websrvConfig = conf.webserver;
   const express = require("express");
@@ -10,6 +12,14 @@ module.exports = function (conf) {
   let State = require("../helper/states").WebsrvState;
 
   const internalRouter = require("./routes/internalRouter");
+
+  app.dashboardExist = (cb) => {
+    let result = fs.existsSync(path.join(__dirname, "../../dashboard/"));
+    if (result) {
+      cb();
+    }
+    return result;
+  };
 
   app.use((req, res, next) => {
     var start = process.hrtime();
@@ -26,10 +36,22 @@ module.exports = function (conf) {
   app.use(bodyParser.json());
   app.use(cookieParser());
   app.use("/api", internalRouter);
-  app.use("/dashboard", express.static(__dirname + "/../../dashboard/build"));
-  app.get("/dashboard/*", (req, res) => {
-    let indexPath = path.join(__dirname + "/../../dashboard/build/index.html");
-    res.sendFile(indexPath);
+
+  app.dashboardExist(() => {
+    app.use("/dashboard", express.static(__dirname + "/../../dashboard/build"));
+    app.get("/dashboard/*", (req, res) => {
+      let indexPath = path.join(
+        __dirname + "/../../dashboard/build/index.html"
+      );
+      res.sendFile(indexPath);
+    });
+    console.log(
+      "Dashboard is enabled on http://" +
+        websrvConfig.host +
+        ":" +
+        websrvConfig.port +
+        "/dashboard"
+    );
   });
 
   app.slisten = function (cb) {
