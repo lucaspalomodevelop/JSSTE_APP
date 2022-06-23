@@ -1,4 +1,6 @@
-dashboard/*
+
+dashboard/build
+
 .jssteconfig
 
 files/sites
