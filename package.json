@@ -5,7 +5,11 @@
   "license": "MIT",
   "scripts": {
     "test": "mocha ./test/index.js",
-    "start": "node ./src/index.js"
+    "start": "node ./src/index.js",
+    "build": "cd ./dashboard && yarn build ",
+    "install-full": "yarn && cd ./dashboard && yarn",
+    "setup":"yarn install-full && yarn build && yarn start",
+    "dev":"yarn build && yarn start"
   },
   "dependencies": {
     "body-parser": "^1.19.2",

@@ -9,17 +9,21 @@ router.get("/conf", (req, res) => {
   res.json(conf);
 });
 
+router.get("/jsste/status/obj/:obj", (req, res) => {
+  res.json(States.JssteState[req.params.obj]);
+});
 router.get("/jsste/status", (req, res) => {
   res.json(States.JssteState);
 });
 router.get("/websrv/status", (req, res) => {
   res.json(States.WebsrvState);
 });
-router.get("/shortlogs", (req, res) => {
-  res.json(logger.getCurrentlog(32));
+
+router.get("/logs/length/:leng", (req, res) => {
+  res.json(logger.getCurrentlog(req.params.leng));
 });
 router.get("/logs", (req, res) => {
-  res.json(logger.getCurrentlog(64));
+  res.json(logger.getCurrentlog(-1));
 });
 
 module.exports = router;

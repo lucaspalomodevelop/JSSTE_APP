@@ -1,4 +1,5 @@
 const res = require("express/lib/response");
+const { JssteState } = require("../helper/states");
 
 module.exports = function (conf) {
   const websrvConfig = conf.webserver;
@@ -10,6 +11,7 @@ module.exports = function (conf) {
   const fs = require("fs");
   const path = require("path");
   let State = require("../helper/states").WebsrvState;
+  let jsste = require("../jsste");
 
   const internalRouter = require("./routes/internalRouter");
 
@@ -30,6 +32,7 @@ module.exports = function (conf) {
         `${req.method} ${req.baseUrl + req.path} ${res.statusCode} | ${time}`
       );
     });
+    // jsste.render("{}", "");
     next();
   });
   app.use(cors());
@@ -53,6 +56,44 @@ module.exports = function (conf) {
         "/dashboard"
     );
   });
+
+  let folders = {
+    jsste: "pages",
+    css: "styles",
+  };
+  
+  function getFolderFromFileEnding(filename) {
+    let regex_isAnDotfile = /\w+\.[a-z]*[A-Z]*/;
+    if (regex_isAnDotfile.test(filename)) {
+      let ending = filename.split(".").pop();
+      // let ending = path.extname(filename).replace(".", "");
+      return "" + folders[ending];
+    }
+    return "" + folders.jsste;
+  }
+  
+
+  function defaultUse(req, res, next) {
+    let regex_isAnDotfile = /\w+\.[a-z]*[A-Z]*/;
+    let filePath = path.join(
+      __dirname.toString(),
+      getFolderFromFileEnding(req.url),
+      req.url.toString()
+    );
+    if (regex_isAnDotfile.test(req.url) && !filePath.endsWith(".jsste")) {
+      res.sendFile(filePath);
+    } else if (fs.existsSync(filePath + ".jsste")) {
+      let content = jsste.renderFile(filePath + ".jsste");
+      res.send(content);
+    } else if (fs.lstatSync(filePath).isDirectory()) {
+      let content = jsste.renderFile(
+        decode(path.join(filePath, "index.jsste"))
+      );
+      res.send(content);
+    } else next();
+  }
+
+  app.get("/*", defaultUse);
 
   app.slisten = function (cb) {
     app.ServerInstance = app
