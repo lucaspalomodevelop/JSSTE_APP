@@ -6,10 +6,10 @@
   "scripts": {
     "test": "mocha ./test/index.js",
     "start": "node ./src/index.js",
-    "build": "cd ./dashboard && yarn build ",
-    "install-full": "yarn && cd ./dashboard && yarn",
-    "setup":"yarn install-full && yarn build && yarn start",
-    "dev":"yarn build && yarn start"
+    "build": "cd ./dashboard && npm run build ",
+    "install-full": "npm install && cd ./dashboard && npm install",
+    "setup":"npm run install-full && npm run build && npm run start",
+    "dev":"npm run build && npm run start"
   },
   "dependencies": {
     "body-parser": "^1.19.2",
