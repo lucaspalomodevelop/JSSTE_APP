@@ -10,13 +10,13 @@ router.get("/conf", (req, res) => {
 });
 
 router.get("/jsste/status/obj/:obj", (req, res) => {
-  res.json(States.JssteState[req.params.obj]);
+  res.json(States.JSSTEState()[req.params.obj]);
 });
 router.get("/jsste/status", (req, res) => {
-  res.json(States.JssteState);
+  res.json(States.JSSTEState());
 });
 router.get("/websrv/status", (req, res) => {
-  res.json(States.WebsrvState);
+  res.json(States.WebserverState());
 });
 
 router.get("/logs/length/:leng", (req, res) => {

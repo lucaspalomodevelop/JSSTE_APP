@@ -1,16 +1,18 @@
 const res = require("express/lib/response");
-const { JssteState } = require("../helper/states");
 
 module.exports = function (conf) {
   const websrvConfig = conf.webserver;
   const express = require("express");
   const app = express();
+  const http = require("http");
+  const server = http.createServer(app);
+  const io = require("../helper/socket").init(server);
   const bodyParser = require("body-parser");
   const cookieParser = require("cookie-parser");
   const cors = require("cors");
   const fs = require("fs");
   const path = require("path");
-  let State = require("../helper/states").WebsrvState;
+  let State = require("../helper/states");
   let jsste = require("../jsste");
 
   const internalRouter = require("./routes/internalRouter");
@@ -61,7 +63,7 @@ module.exports = function (conf) {
     jsste: "pages",
     css: "styles",
   };
-  
+
   function getFolderFromFileEnding(filename) {
     let regex_isAnDotfile = /\w+\.[a-z]*[A-Z]*/;
     if (regex_isAnDotfile.test(filename)) {
@@ -71,7 +73,6 @@ module.exports = function (conf) {
     }
     return "" + folders.jsste;
   }
-  
 
   function defaultUse(req, res, next) {
     let regex_isAnDotfile = /\w+\.[a-z]*[A-Z]*/;
@@ -96,16 +97,16 @@ module.exports = function (conf) {
   app.get("/*", defaultUse);
 
   app.slisten = function (cb) {
-    app.ServerInstance = app
+    app.ServerInstance = server
       .listen(websrvConfig.port, websrvConfig.host, () => {
-        State.status = 0;
-        State.statusMSG = "webserver is running";
-        State.port = websrvConfig.port;
+        State.WebserverState().status = 0;
+        State.WebserverState().statusMSG = "webserver is running";
+        State.WebserverState().port = websrvConfig.port;
         cb(websrvConfig.host, websrvConfig.port);
       })
       .on("error", (err) => {
-        State.status = 1;
-        State.statusMSG = "webserver could not started";
+        State.WebserverState().status = 1;
+        State.WebserverState().statusMSG = "webserver could not started";
         console.error(err);
       });
   };
