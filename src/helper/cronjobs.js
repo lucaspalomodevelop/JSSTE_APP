@@ -1,4 +1,4 @@
-var CronJob = require("cron").CronJob;
+let CronJob = require("cron").CronJob;
 let jobs = {};
 let jobsArray = [];
 

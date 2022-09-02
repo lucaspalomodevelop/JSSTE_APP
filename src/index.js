@@ -13,9 +13,9 @@ let os = require("os");
  */
 websrv.slisten((host, port) => {
   console.log("Server started on http://" + host + ":" + port);
-  websrv.dashboardExist(()=>{
- //   open("http://" + host + ":" + port + "/dashboard");
-  })
+  websrv.dashboardExist(() => {
+    open("http://" + host + ":" + port + "/dashboard");
+  });
 });
 
 /**
