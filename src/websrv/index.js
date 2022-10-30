@@ -13,7 +13,11 @@ module.exports = function (conf) {
   const fs = require("fs");
   const path = require("path");
   let State = require("../helper/states");
-  let jsste = require("../jsste");
+  let jsste = require("jsste");
+  jsste.setStateFunction(({ status, statusMSG }) => {
+    State.JSSTEState().status = status;
+    State.JSSTEState().statusMSG = statusMSG;
+  });
 
   const internalRouter = require("./routes/internalRouter");
 
@@ -34,7 +38,7 @@ module.exports = function (conf) {
         `${req.method} ${req.baseUrl + req.path} ${res.statusCode} | ${time}`
       );
     });
-    // jsste.render("{}", "");
+    jsste.render({ hallo: "blub" }, "<[hallo]>");
     next();
   });
   app.use(cors());

@@ -38,6 +38,9 @@ function JssteStatus() {
           {/* Message: {JSSTEstatus.statusMSG} */}
           {statusConverter(JSSTEstatus).msg}
         </Alert>
+        <Alert variant={statusConverter(JSSTEstatus).BootstrapClass}>
+          Message: {JSSTEstatus.statusMSG}
+        </Alert>
       </Card.Body>
     </Card>
   );
