@@ -38,7 +38,6 @@ module.exports = function (conf) {
         `${req.method} ${req.baseUrl + req.path} ${res.statusCode} | ${time}`
       );
     });
-    jsste.render({ hallo: "blub" }, "<[hallo]>");
     next();
   });
   app.use(cors());
