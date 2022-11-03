@@ -1,3 +1,14 @@
+cache
+dashboard/build
+
+.jssteconfig
+
+files/sites
+files/templates
+files/media
+
+planung
+
 # Logs
 logs
 *.log

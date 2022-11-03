@@ -1,0 +1,12 @@
+{
+    "webserver":{
+        "port":8081,
+        "host":"127.0.0.1",
+        "caching":false
+    },
+    "jsste":{
+        "paths":{
+            "files":"./files"
+        }
+    }
+}

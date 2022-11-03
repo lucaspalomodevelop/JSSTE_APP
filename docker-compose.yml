@@ -1,0 +1,8 @@
+version: '3'
+services:
+    jsste:
+      build: .
+      ports:
+        - "8080:8081"
+      volumes:
+      - .:/app
