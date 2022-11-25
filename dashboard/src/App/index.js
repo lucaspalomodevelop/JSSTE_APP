@@ -4,9 +4,6 @@ import Routes from "./routes";
 import Navbar from "./navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Dashboard from "../Dashboard";
-import Log from "../Log";
-import Settings from "../Settings";
 
 function App() {
   return (

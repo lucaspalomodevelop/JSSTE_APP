@@ -601,10 +601,10 @@
   dependencies:
     "argparse" "^2.0.1"
 
-"jsste@^1.2.3":
-  "integrity" "sha512-n6DLmM7o4IsRv3FP0IqRTryzmN5M1Sa5HCSxh01fms2r18GGE2A81FvQVTIPDv+km2kj5DePeWckEeh1a/N0LQ=="
-  "resolved" "https://registry.npmjs.org/jsste/-/jsste-1.2.3.tgz"
-  "version" "1.2.3"
+"jsste@^1.3.3":
+  "integrity" "sha512-INSZSJtjUL5Be7Z7bPWjrn/Zdoe7H+CwJ6ez6Oy/0p8huAwg8JotJ+nnPiwhcBiaYcPsvkWQAcFk1feK94ENaQ=="
+  "resolved" "https://registry.npmjs.org/jsste/-/jsste-1.3.3.tgz"
+  "version" "1.3.3"
 
 "locate-path@^6.0.0":
   "integrity" "sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw=="
