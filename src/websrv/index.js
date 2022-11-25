@@ -19,7 +19,7 @@ module.exports = function (conf) {
     State.JSSTEState().statusMSG = statusMSG;
   });
 
-  const internalRouter = require("./routes/internalRouter");
+  const internalRouter = require("./routes/internalRouter");32
 
   app.dashboardExist = (cb) => {
     let result = fs.existsSync(path.join(__dirname, "../../dashboard/"));

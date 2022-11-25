@@ -2,8 +2,8 @@ import { Container, Row, Col, Navbar, Nav } from "react-bootstrap";
 import { Routes as RRoutes, Route, Link, BrowserRouter, Layout } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Dashboard from "../components/Dashboard";
-import Log from "../components/Log";
+import Dashboard from "../pages/Dashboard";
+import Log from "../pages/Log";
 import Settings from "../Settings";
 
 function Routes() {

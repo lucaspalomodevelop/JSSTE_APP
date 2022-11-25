@@ -2,7 +2,7 @@ import { Stack, Card, Alert, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { github as CodeStyle } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import axiosInstance from "../lib/axiosInstance";
+import axiosInstance from "../../lib/axiosInstance";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "prismjs/themes/prism.css";
 
